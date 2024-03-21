@@ -11,18 +11,19 @@ const { Admin } = require("./models/adminModel");
 const winston = require("winston");
 const logger = require("./logger");
 const logRoutes = require("./routes/log.route");
+require("dotenv").config();
 
 
 const app = express();
 app.use(express.json());
 app.use(cors(
-    { origin: ["http://localhost:3000", "http://127.0.0.1:5500"], methods: ["GET", "POST"], }
+    { origin: ["https://iotfront.neosao.online", "http://localhost:3000"], methods: ["GET", "POST"], }
 ))
 app.use("/logs", logRoutes);
 const server = createServer(app);
 const io = socketIo(server, {
     cors: {
-        origin: ["http://localhost:3000", "http://127.0.0.1:5500"],
+        origin: ["https://iotfront.neosao.online", "http://localhost:3000"],
         methods: ["GET", "POST"]
     }
 });
